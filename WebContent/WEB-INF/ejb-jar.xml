@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee" 
+		xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+						    http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+	version="3.1">
+	<enterprise-beans>
+	
+		<message-driven>
+			<ejb-name>TopicListener2</ejb-name>
+			<ejb-class>com.shaojie.www.TopicMessageDrivenExample.TopicListenerEJB</ejb-class>
+			<activation-config>
+        		<activation-config-property>
+          			<activation-config-property-name>destination</activation-config-property-name>
+          			<activation-config-property-value>topic/test</activation-config-property-value>
+        		</activation-config-property>
+       		    <activation-config-property>
+         		    <activation-config-property-name>destinationType</activation-config-property-name>
+          		    <activation-config-property-value>javax.jms.Topic</activation-config-property-value>
+        		</activation-config-property>
+      		</activation-config>	
+		</message-driven>
+		
+		<message-driven>
+			<ejb-name>QueueListener2</ejb-name>
+			<ejb-class>com.shaojie.www.QueueMessageDrivenExample.QueueListenerEJB</ejb-class>
+			<activation-config>
+        		<activation-config-property>
+          			<activation-config-property-name>destination</activation-config-property-name>
+          			<activation-config-property-value>queue/test</activation-config-property-value>
+        		</activation-config-property>
+       		    <activation-config-property>
+         		    <activation-config-property-name>destinationType</activation-config-property-name>
+          		    <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+        		</activation-config-property>
+      		</activation-config>	
+		</message-driven>
+		
+	</enterprise-beans>
+	
+	<!-- The <interceptors> method contains the specification of all the interceptor classes in the module. -->
+	<interceptors>
+		<!-- In an <interceptor> element a class is specified as being an interceptor 
+			class and the different interceptor method(s) are also specified. The <interceptor> 
+			element corresponds, at least partially, to the @Interceptor annotation. -->
+		<interceptor>
+			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
+			<!-- The <around-invoke> element corresponds to the @AroundInvoke annotation, 
+				specifying at most one method in the interceptor class that is to intercept 
+				business method calls on EJBs. -->
+			<around-invoke>
+				<method-name>aroundInvoke</method-name>
+			</around-invoke>
+		</interceptor>
+	</interceptors>
+	
+	<assembly-descriptor>
+		<!-- This element is used to specify the target(s) to which a specified 
+			interceptor is to be applied. In the case of a default interceptor, we use 
+			the wildcard * when specifying the name of the EJB. -->
+		<interceptor-binding>
+			<ejb-name>StatefulSession2RemoteBeanImplt</ejb-name>
+			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
+		</interceptor-binding>
+	</assembly-descriptor>
+	
+</ejb-jar>
