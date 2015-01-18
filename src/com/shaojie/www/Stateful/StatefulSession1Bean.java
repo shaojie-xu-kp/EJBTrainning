@@ -13,7 +13,7 @@ import javax.ejb.StatefulTimeout;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-@Stateful
+@Stateful(name="StatefulSessionBeanFirst",mappedName="StatefulSessionBeanFirst")
 @LocalBean
 @StatefulTimeout(value=5, unit=TimeUnit.HOURS)
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)

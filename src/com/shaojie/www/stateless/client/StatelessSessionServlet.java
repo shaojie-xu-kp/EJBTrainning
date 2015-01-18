@@ -17,7 +17,7 @@ public class StatelessSessionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	@EJB
+	@EJB(mappedName="java:module/SLSB")
 	StatelessSessionBeanInterface statelessSessionBean;
 	
 	@Override

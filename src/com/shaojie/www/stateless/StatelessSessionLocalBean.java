@@ -4,12 +4,10 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateless;
 
-@Stateless
-@Remote(StatelessSessionBeanInterface.class)
+@Stateless(name="SLSB")
 public class StatelessSessionLocalBean implements StatelessSessionBeanInterface {
 
 	private static int sCurrentinstanceNumber = 1;

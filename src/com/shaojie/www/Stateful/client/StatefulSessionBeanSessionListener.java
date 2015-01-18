@@ -13,8 +13,8 @@ public class StatefulSessionBeanSessionListener implements HttpSessionListener {
 		try {
 
 			InitialContext theInitialContext = new InitialContext();
-			Object theBeanReference = theInitialContext.lookup("java:module/StatefulSession1Bean");
-			Object theRemoteBeanReference = theInitialContext.lookup("java:global/EJBTraining/StatefulSession2RemoteBeanImplt");
+			Object theBeanReference = theInitialContext.lookup("java:module/StatefulSessionBeanFirst");
+			Object theRemoteBeanReference = theInitialContext.lookup("java:module/StatefulSession2Bean!com.shaojie.www.Stateful.StatefulSession2RemoteBeanInterface");
 			if (theBeanReference != null) {
 				/* Store the reference in the HTTP session. */
 				inHttpSessionEvent.getSession().setAttribute(StatefulSessaion1Servlet.STATEFUL_EJB_HTTP_SESSION_VAR, theBeanReference);

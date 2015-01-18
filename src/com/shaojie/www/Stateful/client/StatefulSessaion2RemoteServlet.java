@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shaojie.www.Stateful.StatefulSession2RemoteBean;
+import com.shaojie.www.Stateful.StatefulSession2RemoteBeanInterface;
 
 @WebServlet(name = "StatefulSession2RemoteServlet", urlPatterns = "/testStatefulRemoteBean.do")
 public class StatefulSessaion2RemoteServlet extends HttpServlet {
@@ -22,8 +22,8 @@ public class StatefulSessaion2RemoteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException{
-		StatefulSession2RemoteBean theStatefulRemoteSessionBean = null;
-		theStatefulRemoteSessionBean = (StatefulSession2RemoteBean)inRequest.getSession().getAttribute(STATEFUL_REMOTE_EJB_HTTP_SESSION_VAR);
+		StatefulSession2RemoteBeanInterface theStatefulRemoteSessionBean = null;
+		theStatefulRemoteSessionBean = (StatefulSession2RemoteBeanInterface)inRequest.getSession().getAttribute(STATEFUL_REMOTE_EJB_HTTP_SESSION_VAR);
 		PrintWriter theResponseWriter = inResponse.getWriter();
 		if(theStatefulRemoteSessionBean != null){
 			String theRequestNameParam = inRequest.getParameter("name");
