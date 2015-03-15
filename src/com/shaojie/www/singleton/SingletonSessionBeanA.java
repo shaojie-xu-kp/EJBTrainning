@@ -13,9 +13,10 @@ import javax.interceptor.Interceptors;
 
 import com.shaojie.www.interceptor.LogInterceptor;
 
-@Singleton
+
 @LocalBean
 @Startup
+@Singleton
 @DependsOn("SingletonSessionBeanB")
 @Interceptors(LogInterceptor.class)
 public class SingletonSessionBeanA {

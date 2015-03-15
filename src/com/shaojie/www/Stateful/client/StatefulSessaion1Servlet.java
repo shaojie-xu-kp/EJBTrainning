@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shaojie.www.Stateful.StatefulSession1Bean;
+import com.shaojie.www.Stateful.StatefulSession2LocalBeanInterface;
 
 @WebServlet(name = "StatefulSession1Servlet", urlPatterns = "/testStatefulLocalBean.do")
 public class StatefulSessaion1Servlet extends HttpServlet {
@@ -20,6 +22,9 @@ public class StatefulSessaion1Servlet extends HttpServlet {
 
 	public static final String STATEFUL_EJB_HTTP_SESSION_VAR = "_statefulSession1Bean";
 		
+	@EJB
+	StatefulSession2LocalBeanInterface sfsbLocal;
+	
 	@Override
 	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException{
 		StatefulSession1Bean theStatefulSessionBean = null;
@@ -42,6 +47,8 @@ public class StatefulSessaion1Servlet extends HttpServlet {
 			}
 			theResponseWriter.println("Response from the EJB : "+theResponse);
 			//			theStatefulSessionBean.remove();
+			sfsbLocal.remove();
+			sfsbLocal.remove();
 			
 		}else{
 			theResponseWriter.print("Unable to retrive an instance of the stateful session bean.");

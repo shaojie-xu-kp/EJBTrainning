@@ -42,7 +42,7 @@ public class ScheduledStatelessSessionBean {
 	 * @param inTimer Timer that caused the timeout callback invocation.
 	 */
 //	@Schedule(second = "20, 45", minute = "*", hour = "6-22", dayOfWeek = "Mon-Fri", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
-	private void scheduledMethod1(final Timer inTimer) {
+	void scheduledMethod1(final Timer inTimer) {
 		System.out.println("ScheduledStatelessSessionBean.scheduledMethod1: " + mInstanceNo + " entering at: " + new Date());
 		System.out.println(" Rollback only: " + mBeanContext.getRollbackOnly());
 		System.out.println(" Timer info: " + inTimer.getInfo());

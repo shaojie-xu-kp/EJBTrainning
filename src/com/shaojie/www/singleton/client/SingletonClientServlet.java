@@ -26,6 +26,9 @@ public class SingletonClientServlet extends HttpServlet {
 
 	@EJB
 	private SingletonSessionBeanB mSingletonSessionBeanB;
+	
+	@EJB
+	private SingletonSessionBeanA mSingletonSessionBeanA1;
 
 	@Override
 	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException {
@@ -58,6 +61,7 @@ public class SingletonClientServlet extends HttpServlet {
 		theMessage = mSingletonSessionBeanB.retrieveMessage();
 		theResponseWriter.println(theMessage);
 		System.out.println("**** Exiting SingletonClientServlet");
+		System.out.println("mSingletonSessionBeanA = mSingletonSessionBeanA1 ? " + mSingletonSessionBeanA.equals(mSingletonSessionBeanA1));
 		theResponseWriter.println("Finished invoking singleton session beans!");
 
 	}

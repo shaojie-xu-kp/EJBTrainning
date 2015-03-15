@@ -7,10 +7,14 @@ public class MyDefaultInterceptor {
 
 	public Object aroundInvoke(InvocationContext inInvocationContext)
 			throws Exception {
-		System.out.println(" MyDefaultInterceptor intercepting: "
-				+ inInvocationContext.getTarget().getClass().getSimpleName()
+		System.out.println(" Global Interceptor Before Invoke: "
+				+ inInvocationContext.getMethod().getDeclaringClass().getName()
 				+ "." + inInvocationContext.getMethod().getName());
-		return inInvocationContext.proceed();
+		Object result = inInvocationContext.proceed();
+		System.out.println(" Global Interceptor After Invoke: "
+				+ inInvocationContext.getMethod().getDeclaringClass().getName()
+				+ "." + inInvocationContext.getMethod().getName());
+		return result;
 	}
 
 	@PostConstruct

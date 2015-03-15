@@ -37,32 +37,42 @@
       		</activation-config>	
 		</message-driven>
 		
+		<session>
+			<ejb-name>TimerServiceExampleBean</ejb-name>
+			<ejb-class>com.shaojie.www.TimerExample.TimerServiceExampleBean</ejb-class>
+			<around-timeout>
+				<method-name>timeoutInterceptorMethod</method-name>
+			</around-timeout>
+		</session>
+		
 	</enterprise-beans>
 	
-	<!-- The <interceptors> method contains the specification of all the interceptor classes in the module. -->
 	<interceptors>
-		<!-- In an <interceptor> element a class is specified as being an interceptor 
-			class and the different interceptor method(s) are also specified. The <interceptor> 
-			element corresponds, at least partially, to the @Interceptor annotation. -->
 		<interceptor>
 			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
-			<!-- The <around-invoke> element corresponds to the @AroundInvoke annotation, 
-				specifying at most one method in the interceptor class that is to intercept 
-				business method calls on EJBs. -->
 			<around-invoke>
 				<method-name>aroundInvoke</method-name>
 			</around-invoke>
 		</interceptor>
+		<interceptor>
+			<interceptor-class>com.shaojie.www.interceptor.LogInterceptor</interceptor-class>
+		</interceptor>
 	</interceptors>
 	
 	<assembly-descriptor>
-		<!-- This element is used to specify the target(s) to which a specified 
-			interceptor is to be applied. In the case of a default interceptor, we use 
-			the wildcard * when specifying the name of the EJB. -->
 		<interceptor-binding>
-			<ejb-name>StatefulSession2RemoteBeanImplt</ejb-name>
+			<ejb-name>*</ejb-name>
 			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
 		</interceptor-binding>
+		<interceptor-binding>
+			<ejb-name>SLSB</ejb-name>
+			<interceptor-order>
+				<interceptor-class>com.shaojie.www.interceptor.LogInterceptor</interceptor-class>
+				<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
+			</interceptor-order>
+		</interceptor-binding>
 	</assembly-descriptor>
+	
+	
 	
 </ejb-jar>

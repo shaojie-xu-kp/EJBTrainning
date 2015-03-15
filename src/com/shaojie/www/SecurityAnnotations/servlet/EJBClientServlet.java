@@ -18,7 +18,7 @@ import com.shaojie.www.SecurityAnnotations.StatelessSession1Bean;
  * Servlet implementing an EJB client which calls a secured method of an EJB.
  */
 @WebServlet(name = "EJBClientServlet", urlPatterns = "/testSecurity.do")
-@ServletSecurity(httpMethodConstraints = { @HttpMethodConstraint(value = "GET", rolesAllowed = {"plainusers", "superusers","guest" }) })
+@ServletSecurity(httpMethodConstraints = { @HttpMethodConstraint(value = "GET") })
 public class EJBClientServlet extends HttpServlet {
 	/* Constant(s): */
 	private static final long serialVersionUID = 1L;

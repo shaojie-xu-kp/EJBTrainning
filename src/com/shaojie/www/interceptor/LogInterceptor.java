@@ -2,10 +2,8 @@ package com.shaojie.www.interceptor;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.AroundTimeout;
-import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor
 public class LogInterceptor {
 	
 	public LogInterceptor() {
@@ -15,10 +13,10 @@ public class LogInterceptor {
 	@AroundInvoke
 	public Object logMethodEntryExit(InvocationContext inInvocationContext)
 			throws Exception {
-		System.out.println(" LogInterceptor - Entering method: " + inInvocationContext.getTarget().getClass() + " : " + inInvocationContext.getMethod().getName());
+		System.out.println(" LogInterceptor - Entering method: " + inInvocationContext.getMethod().getDeclaringClass() + " : " + inInvocationContext.getMethod().getName());
 		/* Invoke the intercepted method on the EJB and save the result. */
 		Object theResult = inInvocationContext.proceed();
-		System.out.println(" LogInterceptor - Exiting method: " + inInvocationContext.getTarget().getClass() + " : " +  inInvocationContext.getMethod().getName());
+		System.out.println(" LogInterceptor - Exiting method: " + inInvocationContext.getMethod().getDeclaringClass() + " : " +  inInvocationContext.getMethod().getName());
 		/* Return the result from the intercepted method. */
 		return theResult;
 	}

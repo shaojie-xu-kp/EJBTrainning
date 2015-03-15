@@ -34,4 +34,10 @@ public class StatefulSession2Bean implements StatefulSession2RemoteBeanInterface
 		list.add("EJB added in the end");
 		
 	}
+
+	@Override
+	public void remove() {
+		System.out.println("One instance of StatefulSession2Bean has been removed");
+		
+	}
 }

@@ -41,7 +41,7 @@ public class CommonStatelessSessionBean {
 			System.out.println(" Principal type: " + theCallerPrincipal.getClass());
 			testCallerRole("superusers");
 			testCallerRole("plainusers");
-			testCallerRole("ivan");
+			testCallerRole("anonymous");
 		} else {
 			System.out.println(" No session context available.");
 		}

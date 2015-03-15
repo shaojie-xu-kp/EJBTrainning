@@ -12,6 +12,7 @@ import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.ExcludeClassInterceptors;
 
 @Stateful(name="StatefulSessionBeanFirst",mappedName="StatefulSessionBeanFirst")
 @LocalBean
@@ -30,7 +31,7 @@ public class StatefulSession1Bean {
 	}
 	
 	@PreDestroy
-	private void destroy(){
+	private final void destroy(){
 		System.out.println("**********StatefulSession1Bean " +mInstanceNumber+" destroyed.");
 	}
 	
@@ -39,6 +40,7 @@ public class StatefulSession1Bean {
 		System.out.println("**********StatefulSession1Bean " +mInstanceNumber+" removed.");
 	}
 
+	@ExcludeClassInterceptors
 	public String greeting(final String inName){
 		Date currentTime = new Date();
 		String theMessage = "Hello " +inName + ", I am stateful session bean " + mInstanceNumber + ". The time now is : " + currentTime;
@@ -48,4 +50,5 @@ public class StatefulSession1Bean {
 	public void processList(List<String> list){
 		list.add("EJB added in the end");
 	}
+
 }

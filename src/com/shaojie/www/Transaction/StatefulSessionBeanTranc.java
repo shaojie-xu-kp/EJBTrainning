@@ -14,6 +14,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.transaction.UserTransaction;
 
 /**
  * Simplest possible stateless session bean exposing a local, no-interface view.
@@ -29,7 +30,7 @@ public class StatefulSessionBeanTranc implements SessionSynchronization {
 	
 	@Resource
 	private SessionContext mBeanContext;
-
+	
 	@PostConstruct
 	public void initialize() {
 		mInstanceNumber = sCurrentInstanceNumber++;
@@ -42,7 +43,7 @@ public class StatefulSessionBeanTranc implements SessionSynchronization {
 	 * @param inName  Name of person to greet.
 	 * @return Greeting.
 	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public String greeting(final String inName) {
 		Date theCurrentTime = new Date();
 		String theMessage = "";

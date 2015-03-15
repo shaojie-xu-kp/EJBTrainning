@@ -1,10 +1,10 @@
 package com.shaojie.www.stateless;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import javax.ejb.Remove;
 
-@Remote
-public interface StatelessSessionBeanInterface {
+@Local
+public interface StatelessSessionBeanLocal {
 	
 	public String greeting(String name);
 	
@@ -12,5 +12,6 @@ public interface StatelessSessionBeanInterface {
 	
 	@Remove
 	public void remove();
-	
+
+
 }

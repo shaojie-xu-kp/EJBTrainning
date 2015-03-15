@@ -11,14 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shaojie.www.stateless.StatelessSessionBeanInterface;
+import com.shaojie.www.stateless.StatelessSessionBeanLocal;
 
 @WebServlet(name = "StatelessSessionServlet", urlPatterns = "/testStatelessLocalBean.do")
 public class StatelessSessionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	@EJB(mappedName="java:module/SLSB")
+	@EJB
 	StatelessSessionBeanInterface statelessSessionBean;
+	
+	@EJB
+	StatelessSessionBeanLocal statelessSessionBeanLocal;
+	
 	
 	@Override
 	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException{
@@ -29,8 +34,11 @@ public class StatelessSessionServlet extends HttpServlet{
 				theRequestNameParam = "Anonymous Coward";
 			}
 			String theResponse = statelessSessionBean.greeting(theRequestNameParam);
+			statelessSessionBean.excludeIntercepted();
 			theResponseWriter.println("Response from the statelessSessionBean : "+theResponse);
-
+			statelessSessionBean.remove();
+			statelessSessionBean.remove();
+			System.out.println("statelessSessionBean = statelessSessionBeanLocal ? " + statelessSessionBean.equals(statelessSessionBeanLocal));
 		}else{
 			theResponseWriter.print("Unable to retrive an instance of the stateless session bean.");
 		}

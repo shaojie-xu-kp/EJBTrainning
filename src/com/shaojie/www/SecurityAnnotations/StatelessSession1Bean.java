@@ -5,11 +5,14 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.jboss.security.annotation.SecurityDomain;
+
 /**
  * Secured stateless session bean exposing a local, no-interface view.
  */
 @Stateless
 @LocalBean
+@SecurityDomain("other")
 /*
  * The roles that are to be used from within the code when invoking
  * isCallerInRole need to be declared using the @DeclareRoles annotation,
