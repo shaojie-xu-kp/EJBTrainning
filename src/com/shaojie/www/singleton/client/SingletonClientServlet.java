@@ -31,9 +31,7 @@ public class SingletonClientServlet extends HttpServlet {
 	private SingletonSessionBeanA mSingletonSessionBeanA1;
 
 	@Override
-	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException {
-		System.out.println("**** Entering SingletonClientServlet");
-		
+	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException {		
 		String theRequestNameParam = inRequest.getParameter("name");
 		String theRequestActionParam = inRequest.getParameter("action");
 		
@@ -58,10 +56,7 @@ public class SingletonClientServlet extends HttpServlet {
 		String theMessage;
 		theMessage = mSingletonSessionBeanA.retrieveMessage();
 		theResponseWriter.println(theMessage);
-		theMessage = mSingletonSessionBeanB.retrieveMessage();
-		theResponseWriter.println(theMessage);
-		System.out.println("**** Exiting SingletonClientServlet");
-		System.out.println("mSingletonSessionBeanA = mSingletonSessionBeanA1 ? " + mSingletonSessionBeanA.equals(mSingletonSessionBeanA1));
+		//System.out.println("mSingletonSessionBeanA = mSingletonSessionBeanA1 ? " + mSingletonSessionBeanA.equals(mSingletonSessionBeanA1));
 		theResponseWriter.println("Finished invoking singleton session beans!");
 
 	}

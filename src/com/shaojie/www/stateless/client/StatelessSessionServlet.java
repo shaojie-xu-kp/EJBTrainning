@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.shaojie.www.stateless.StatelesNoInterfaceLocalBean;
 import com.shaojie.www.stateless.StatelessSessionBeanInterface;
 import com.shaojie.www.stateless.StatelessSessionBeanLocal;
 
@@ -19,26 +20,38 @@ public class StatelessSessionServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	StatelessSessionBeanInterface statelessSessionBean;
+	StatelessSessionBeanInterface statelessSessionBean1;
 	
 	@EJB
-	StatelessSessionBeanLocal statelessSessionBeanLocal;
+	StatelessSessionBeanInterface statelessSessionBean2;
+	
+	@EJB
+	StatelessSessionBeanLocal statelessSessionBeanLocal1;
+	
+	@EJB
+	StatelessSessionBeanLocal statelessSessionBeanLocal2;
+	
+	@EJB
+	StatelesNoInterfaceLocalBean statelessNoInterfaceLocal;
+	
+	
+
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest inRequest, HttpServletResponse inResponse) throws ServletException, IOException{
 		PrintWriter theResponseWriter = inResponse.getWriter();
-		if(statelessSessionBean != null){
+		if(statelessSessionBean1 != null){
 			String theRequestNameParam = inRequest.getParameter("name");
 			if(theRequestNameParam == null){
 				theRequestNameParam = "Anonymous Coward";
 			}
-			String theResponse = statelessSessionBean.greeting(theRequestNameParam);
-			statelessSessionBean.excludeIntercepted();
+			String theResponse = statelessSessionBean1.greeting(theRequestNameParam);
+			statelessSessionBean1.excludeIntercepted();
 			theResponseWriter.println("Response from the statelessSessionBean : "+theResponse);
-			statelessSessionBean.remove();
-			statelessSessionBean.remove();
-			System.out.println("statelessSessionBean = statelessSessionBeanLocal ? " + statelessSessionBean.equals(statelessSessionBeanLocal));
+			System.out.println("statelessSessionBean1 = statelessSessionBean2 ? " + statelessSessionBean1.equals(statelessSessionBean2));
+			System.out.println("statelessSessionBeanLocal1 = statelessSessionBeanLocal2 ? " + statelessSessionBeanLocal1.equals(statelessSessionBeanLocal2));
+			statelessNoInterfaceLocal.foo();
 		}else{
 			theResponseWriter.print("Unable to retrive an instance of the stateless session bean.");
 		}

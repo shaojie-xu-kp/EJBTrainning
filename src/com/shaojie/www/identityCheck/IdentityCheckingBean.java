@@ -22,6 +22,9 @@ public class IdentityCheckingBean {
 	private SingletonSessionBean mSingleton2;
 	@EJB
 	private StatelessSessionBeanLocalBusiness mStatelessLocalBusiness;
+	@EJB
+	private StatelessSessionBeanLocalBusiness mStatelessLocalBusiness2;
+
 
 	public void checkBeanIdentities() {
 		/* Compare stateless bean with stateless bean. */
@@ -30,6 +33,8 @@ public class IdentityCheckingBean {
 		doIdentityCheck(mStateless1, mStateless2,"Stateless1 equals stateless2");
 		doIdentityCheck(mStateless2, mStateless1,"Stateless2 equals stateless1");
 		doIdentityCheck(mStateless1, mStatelessLocalBusiness,"Stateless1 equals stateless local business:");
+		doIdentityCheck(mStatelessLocalBusiness2, mStatelessLocalBusiness,"mStatelessLocalBusiness2 equals mStatelessLocalBusiness:");
+
 		/* Compare stateless bean with other kinds of beans. */
 		System.out.println("\n***** Compare stateless bean with other kinds of beans:");
 		doIdentityCheck(mStateless1, mStateful1, "Stateless1 equals stateful1");
@@ -55,6 +60,7 @@ public class IdentityCheckingBean {
 		doBeanHashCode(mStateless1, "Stateless1");
 		doBeanHashCode(mStateless2, "Stateless2");
 		doBeanHashCode(mStatelessLocalBusiness, "Stateless local business");
+		doBeanHashCode(mStatelessLocalBusiness2, "Stateless local business 2");
 		/* Hash codes of stateful beans. */
 		System.out.println("\n***** Stateful bean hash codes:");
 		doBeanHashCode(mStateful1, "Stateful1");

@@ -4,11 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 @Stateful
-@Remote(StatefulSession2RemoteBean.class)
 public class StatefulSession2RemoteBeanImplt implements StatefulSession2RemoteBean {
 
 	private static int sCurrentInstanceNumber = 1;
@@ -24,8 +22,7 @@ public class StatefulSession2RemoteBeanImplt implements StatefulSession2RemoteBe
 	@Override
 	public String greeting(final String inName) {
 		Date theCurrentTime = new Date();
-		String theMessage = "Hello " + inName + ", I am stateful session bean "
-				+ mInstanceNumber + ". The time is now: " + theCurrentTime;
+		String theMessage = "Hello " + inName + ", I am StatefulSession2RemoteBeanImplt " + mInstanceNumber + ". The time is now: " + theCurrentTime;
 		return theMessage;
 	}
 

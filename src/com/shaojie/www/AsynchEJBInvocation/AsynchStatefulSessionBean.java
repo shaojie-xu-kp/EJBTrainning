@@ -6,19 +6,19 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.ejb.AccessTimeout;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
+import javax.ejb.StatefulTimeout;
 
 /**
  * Stateful session bean with asynchronous methods.
  */
 @Stateful
 @LocalBean
-@AccessTimeout(value = 10, unit = TimeUnit.MINUTES)
+@StatefulTimeout(value = 10, unit = TimeUnit.MINUTES)
 public class AsynchStatefulSessionBean {
 	@Resource
 	private SessionContext mSessionContext;
@@ -48,11 +48,6 @@ public class AsynchStatefulSessionBean {
 		return new AsyncResult<String>(theResult);
 	}
 
-	@Asynchronous
-	public void slowOneWayAsynch() throws Exception{
-		waitSomeTime(5000L);
-		System.out.println("***** AsynchStatefulSessionBean Exiting slowOneWayAsynch");
-	}
 
 	@Asynchronous
 	public Future<String> canBeCancelled() {

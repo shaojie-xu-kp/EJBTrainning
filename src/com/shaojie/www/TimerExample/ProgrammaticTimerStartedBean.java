@@ -31,7 +31,6 @@ import javax.ejb.TransactionAttributeType;
  */
 @Singleton
 @LocalBean
-@Startup
 public class ProgrammaticTimerStartedBean implements TimedObject {
 
 	
@@ -65,7 +64,7 @@ public class ProgrammaticTimerStartedBean implements TimedObject {
 		 * timer. We could have used the timer service object in the instance
 		 * variable mTimerService with the same effect.
 		 */
-		mTimerService.createIntervalTimer(5000000, 5000000, theTimerConfig);
+		mTimerService.createIntervalTimer(300000, 300000, theTimerConfig);
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class ProgrammaticTimerStartedBean implements TimedObject {
 	 *            method.
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void ejbTimeout(final Timer inTimer) {
+	public void ejbTimeout(final Timer inTimer) throws RuntimeException{
 		/*
 		 * Output the time at which the method was invoked and the arbitrary
 		 * serializable data enclosed when creating the TimerConfig and the

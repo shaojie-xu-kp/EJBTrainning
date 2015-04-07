@@ -13,7 +13,7 @@ public class LogInterceptor {
 	@AroundInvoke
 	public Object logMethodEntryExit(InvocationContext inInvocationContext)
 			throws Exception {
-		System.out.println(" LogInterceptor - Entering method: " + inInvocationContext.getMethod().getDeclaringClass() + " : " + inInvocationContext.getMethod().getName());
+		//System.out.println(" LogInterceptor - Entering method: " + inInvocationContext.getMethod().getDeclaringClass() + " : " + inInvocationContext.getMethod().getName());
 		/* Invoke the intercepted method on the EJB and save the result. */
 		Object theResult = inInvocationContext.proceed();
 		System.out.println(" LogInterceptor - Exiting method: " + inInvocationContext.getMethod().getDeclaringClass() + " : " +  inInvocationContext.getMethod().getName());
@@ -24,11 +24,9 @@ public class LogInterceptor {
 	@AroundTimeout
 	public final Object logTimeout(InvocationContext inInvocationContext)
 			throws Exception {
-		System.out.println(" LogInterceptor - Entering timeout: "
-				+ inInvocationContext.getMethod().getName());
+		System.out.println(" LogInterceptor - Entering timeout : " + inInvocationContext.getMethod().getName());
 		Object theResult = inInvocationContext.proceed();
-		System.out.println(" LogInterceptor - Exiting timeout: "
-				+ inInvocationContext.getMethod().getName());
+		System.out.println(" LogInterceptor - Exiting timeout : " + inInvocationContext.getMethod().getName());
 		return theResult;
 	}
 }

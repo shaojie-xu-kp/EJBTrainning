@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns="http://java.sun.com/xml/ns/javaee" 
-		xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
-		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 						    http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
 	version="3.1">
 	<enterprise-beans>
-	
-		<message-driven>
+
+		<!--message-driven>
 			<ejb-name>TopicListener2</ejb-name>
 			<ejb-class>com.shaojie.www.TopicMessageDrivenExample.TopicListenerEJB</ejb-class>
 			<activation-config>
-        		<activation-config-property>
-          			<activation-config-property-name>destination</activation-config-property-name>
-          			<activation-config-property-value>topic/test</activation-config-property-value>
-        		</activation-config-property>
-       		    <activation-config-property>
-         		    <activation-config-property-name>destinationType</activation-config-property-name>
-          		    <activation-config-property-value>javax.jms.Topic</activation-config-property-value>
-        		</activation-config-property>
-      		</activation-config>	
+				<activation-config-property>
+					<activation-config-property-name>destination</activation-config-property-name>
+					<activation-config-property-value>topic/test</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Topic</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
 		</message-driven>
-		
+
 		<message-driven>
 			<ejb-name>QueueListener2</ejb-name>
 			<ejb-class>com.shaojie.www.QueueMessageDrivenExample.QueueListenerEJB</ejb-class>
 			<activation-config>
-        		<activation-config-property>
-          			<activation-config-property-name>destination</activation-config-property-name>
-          			<activation-config-property-value>queue/test</activation-config-property-value>
-        		</activation-config-property>
-       		    <activation-config-property>
-         		    <activation-config-property-name>destinationType</activation-config-property-name>
-          		    <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
-        		</activation-config-property>
-      		</activation-config>	
-		</message-driven>
-		
+				<activation-config-property>
+					<activation-config-property-name>destination</activation-config-property-name>
+					<activation-config-property-value>queue/test</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven-->
+
 		<session>
 			<ejb-name>TimerServiceExampleBean</ejb-name>
 			<ejb-class>com.shaojie.www.TimerExample.TimerServiceExampleBean</ejb-class>
@@ -44,9 +43,21 @@
 				<method-name>timeoutInterceptorMethod</method-name>
 			</around-timeout>
 		</session>
-		
+
+		<session>
+			<ejb-name>StatefulSession1Bean</ejb-name>
+			<ejb-class>com.shaojie.www.Stateful.StatefulSession1Bean</ejb-class>
+			<env-entry>
+				<description>The name was explicitly set in the annotation so the classname prefix isn't required</description>
+				<env-entry-name>mInstanceNumber</env-entry-name>
+				<env-entry-type>java.lang.Integer</env-entry-type>
+				<env-entry-value>123</env-entry-value>
+			</env-entry>
+		</session>
+
+
 	</enterprise-beans>
-	
+
 	<interceptors>
 		<interceptor>
 			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
@@ -58,8 +69,8 @@
 			<interceptor-class>com.shaojie.www.interceptor.LogInterceptor</interceptor-class>
 		</interceptor>
 	</interceptors>
-	
-	<assembly-descriptor>
+
+	<!--assembly-descriptor>
 		<interceptor-binding>
 			<ejb-name>*</ejb-name>
 			<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
@@ -71,8 +82,7 @@
 				<interceptor-class>com.shaojie.www.interceptor.MyDefaultInterceptor</interceptor-class>
 			</interceptor-order>
 		</interceptor-binding>
-	</assembly-descriptor>
-	
-	
-	
+	</assembly-descriptor-->
+
+
 </ejb-jar>

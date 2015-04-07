@@ -41,6 +41,8 @@ public class StatefulSessaion2RemoteServlet extends HttpServlet {
 				theResponseWriter.println(st);
 			}
 
+			theStatefulRemoteSessionBean.remove();
+		
 			theResponseWriter.println("Response from the Remote EJB : "+theResponse);
 		}else{
 			theResponseWriter.print("Unable to retrive an instance of the stateful session bean.");

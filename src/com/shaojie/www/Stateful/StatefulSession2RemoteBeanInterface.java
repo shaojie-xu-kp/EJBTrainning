@@ -10,5 +10,7 @@ public interface StatefulSession2RemoteBeanInterface {
 	public String greeting(final String inName);
 	
 	public void processList(List<String> list);
+	
+	public void remove();
 
 }

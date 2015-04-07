@@ -6,33 +6,22 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJBException;
 import javax.ejb.NoSuchObjectLocalException;
-import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.Timer;
 
-/**
- * Stateless session bean that contains two timer callback methods that are
- * scheduled using the @Schedule annotation. An EJB may contain any number of
- * methods annotated with @Schedule that all are invoked according to their own
- * schedule.
- */
 @Stateless
 public class ScheduledStatelessSessionBean {
-	/* Constant(s): */
-	/* Class variable(s): */
 	private static int sCurrentInstanceNo = 1;
-	/* Instance variable(s): */
 	private int mInvocationCounter;
 	private int mInstanceNo = sCurrentInstanceNo++;
+	
 	@Resource
 	private SessionContext mBeanContext;
 
 	@PostConstruct
 	public void initialize() {
-		/* Log the session bean instance creation. */
-		System.out.println("ScheduledStatelessSessionBean created: "
-				+ mInstanceNo + " at: " + new Date());
+		System.out.println("ScheduledStatelessSessionBean created: " + mInstanceNo + " at: " + new Date());
 	}
 
 	/**
@@ -46,11 +35,6 @@ public class ScheduledStatelessSessionBean {
 		System.out.println("ScheduledStatelessSessionBean.scheduledMethod1: " + mInstanceNo + " entering at: " + new Date());
 		System.out.println(" Rollback only: " + mBeanContext.getRollbackOnly());
 		System.out.println(" Timer info: " + inTimer.getInfo());
-		/*
-		 * Wait some time to show what happens with multiple timer callback
-		 * methods being invoked on a session bean that has container managed
-		 * concurrency.
-		 */
 		waitSeconds(15);
 		cancelOverdue(inTimer);
 		System.out.println("ScheduledStatelessSessionBean.scheduledMethod1: " + mInstanceNo + " exiting at: " + new Date());
@@ -73,9 +57,7 @@ public class ScheduledStatelessSessionBean {
 		System.out.println("ScheduledStatelessSessionBean.scheduledMethod2: " + mInstanceNo + " exiting at: " + new Date());
 	}
 
-	private void cancelOverdue(final Timer inTimer)
-			throws IllegalStateException, NoSuchObjectLocalException,
-			EJBException {
+	private void cancelOverdue(final Timer inTimer) {
 		/* Cancel timer after certain number of invocations. */
 		if (mInvocationCounter++ > 5) {
 			System.out.println("Cancelling " + mInstanceNo + "...");
@@ -87,7 +69,6 @@ public class ScheduledStatelessSessionBean {
 		try {
 			Thread.sleep(inSeconds * 1000L);
 		} catch (InterruptedException theException) {
-			// Ignore exceptions.
 		}
 	}
 }
